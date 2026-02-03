@@ -11,3 +11,10 @@
   loop:
     - docker-compose.yml
     - prometheus.yml
+    - alert_rules.yml
+    - filebeat.yml
+
+- name: Docker compose up
+  community.docker.docker_compose_v2:
+    project_src: /opt/obs
+    state: present
