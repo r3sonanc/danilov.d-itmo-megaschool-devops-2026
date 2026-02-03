@@ -1,0 +1,13 @@
+- name: Create obs dir
+  file:
+    path: /opt/obs
+    state: directory
+    mode: "0735"
+
+- name: Copy compose + configs
+  copy:
+    src: "{{ item }}"
+    dest: "/opt/obs/{{ item | basename }}"
+  loop:
+    - docker-compose.yml
+    - prometheus.yml
