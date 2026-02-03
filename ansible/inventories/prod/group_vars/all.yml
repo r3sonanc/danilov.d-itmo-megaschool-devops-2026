@@ -9,10 +9,10 @@ users_create:
   - name: "developer1"
     groups: ["developers", "docker"]
     ssh_keys:
-      - "ssh-ed25519 ... dev1@desktop" # TODO: ssh
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWoNE8+5MuIrCUm3RxFY5kohA8oSaAV04N7rfKOULOc dev1@desktop"
   - name: "admin1"
     groups: ["admins", "docker"]
     ssh_keys:
-      - "ssh-ed25519 ... admin1@decktop" # TODO: ssh2
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGS10IHQzwZCbGVAPgPsdyNIaXgNW9oHmDZ/nioCwVbx admin1@decktop"
 
 sudo_nopasswd_group: "admins"
