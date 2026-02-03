@@ -1,5 +1,8 @@
-- name: Users, groups, ssh keys, sudoers
+- name: Bootstrap users/groups/ssh/sudo
   hosts: servers
   become: true
+  gather_facts: true
+
   roles:
     - users
+    - docker_ce
