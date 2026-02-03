@@ -1,0 +1,37 @@
+- name: Ensure fixed GID groups exist
+  ansible.builtin.group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: present
+  loop: "{{ groups_fixed }}"
+
+- name: Ensure docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Create users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    state: present
+    shell: /bin/bash
+    create_home: true
+    groups: "{{ item.groups | default([]) }}"
+    append: true
+  loop: "{{ users_create }}"
+
+- name: Set authorized_keys for users
+  ansible.posix.authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ item.1 }}"
+    state: present
+  loop: "{{ users_create | subelements(`ssh_keys`, skip_missing=True) }}"
+
+- name: Install sudoers file for admins nopasswd
+  ansible.builtin.templates:
+    src: sudoers_admins.js
+    dest: "/etc/sudoers.d/90- {{ sudo_nopaswd_group }}-nopasswd"
+    owner: root
+    group: root
+    mode: "0440"
+    validate: "visudo -cf %s"

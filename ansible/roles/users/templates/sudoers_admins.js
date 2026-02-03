@@ -1,0 +1,1 @@
+%{{ sudo_nopasswd_group }} ALL=(ALL) NOPASSWD:ALL

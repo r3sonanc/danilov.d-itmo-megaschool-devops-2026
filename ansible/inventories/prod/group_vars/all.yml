@@ -1,0 +1,18 @@
+ansible_user: ubuntu
+ansible_become: true
+
+groups_fixed:
+  - {name: "developers", gid: 23001 }
+  - {name: "admins", gid: 23002 }
+
+users_create:
+  - name: "developer1"
+    groups: ["developers", "docker"]
+    ssh_keys:
+      - "ssh-ed25519 ... dev1@desktop" # TODO: ssh
+  - name: "admin1"
+    groups: ["admins", "docker"]
+    ssh_keys:
+      - "ssh-ed25519 ... admin1@decktop" # TODO: ssh2
+
+sudo_nopasswd_group: "admins"

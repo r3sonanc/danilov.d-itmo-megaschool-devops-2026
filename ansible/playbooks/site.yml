@@ -1,0 +1,5 @@
+- name: Users, groups, ssh keys, sudoers
+  hosts: servers
+  become: true
+  roles:
+    - users
